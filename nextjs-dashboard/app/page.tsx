@@ -37,7 +37,14 @@ export default function Page() {
           width={1000}
           height={760}
           className="hideen md:block"
-          alt="Captura de pantalla del dashboard del proyecto"
+          alt="Captura de pantalla del dashboard del proyecto desktop"
+          />
+                <Image 
+          src="/hero-mobile.png"
+          width={560}
+          height={620}
+          className="block md:hidden"
+          alt="Captura de pantalla del dashboard del proyecto mobile"
           />
         </div>
       </div>
