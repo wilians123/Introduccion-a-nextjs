@@ -54,7 +54,7 @@ export default function PruebasPage() {
 
   return (
     <div className="w-full">
-      <h1 className="text-2xl font-bold mb-6">🧪 Pruebas de Servicios</h1>
+      <h1 className="text-2xl font-bold mb-6"> Pruebas de Servicios</h1>
       
       <div className="grid gap-4 md:grid-cols-2 mb-6">
         <div className="border rounded-lg p-4 bg-blue-50">
@@ -63,12 +63,12 @@ export default function PruebasPage() {
             <button onClick={() => probarServicio('Listar Clientes', probarClientes)}
               className="w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 disabled:opacity-50"
               disabled={cargando}>
-              👥 Listar Clientes
+               Listar Clientes
             </button>
             <button onClick={() => probarServicio('Listar Pedidos', probarPedidos)}
               className="w-full bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 disabled:opacity-50"
               disabled={cargando}>
-              📋 Listar Pedidos
+               Listar Pedidos
             </button>
           </div>
         </div>
@@ -79,26 +79,26 @@ export default function PruebasPage() {
             <button onClick={() => probarServicio('Listar Proveedores', probarProveedores)}
               className="w-full bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 disabled:opacity-50"
               disabled={cargando}>
-              🏢 Listar Proveedores
+               Listar Proveedores
             </button>
             <button onClick={() => probarServicio('Listar Facturas', probarFacturas)}
               className="w-full bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600 disabled:opacity-50"
               disabled={cargando}>
-              📄 Listar Facturas
+               Listar Facturas
             </button>
             <button onClick={() => probarServicio('Integración Circular', probarIntegracion)}
               className="w-full bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 disabled:opacity-50"
               disabled={cargando}>
-              🔄 Integración Circular
+               Integración Circular
             </button>
           </div>
         </div>
       </div>
 
       <div className="border rounded-lg p-4 bg-gray-50">
-        <h3 className="font-semibold mb-2">📊 Resultado:</h3>
+        <h3 className="font-semibold mb-2"> Resultado:</h3>
         <pre className="whitespace-pre-wrap text-sm overflow-auto max-h-96 bg-white p-4 rounded">
-          {resultado || '👆 Haz clic en un botón para probar...'}
+          {resultado || ' Haz clic en un botón para probar...'}
         </pre>
       </div>
     </div>
