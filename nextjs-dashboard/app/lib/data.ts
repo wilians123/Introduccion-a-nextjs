@@ -5,24 +5,24 @@ const API_A = process.env.NEXT_PUBLIC_API_COMPONENTE_A || 'http://localhost:8080
 const API_B = process.env.NEXT_PUBLIC_API_COMPONENTE_B || 'http://localhost:8081/api/v1';
 
 /**
- * Fetch de ingresos mensuales (simulado basado en facturas pagadas)
+ * Fetch de ingresos mensuales (basado en facturas pagadas)
  */
 export async function fetchRevenue(): Promise<Revenue[]> {
   try {
     console.log('Fetching revenue data from local backend...');
     
-    // Obtener facturas pagadas del Componente B
-    const response = await fetch(`${API_B}/facturas?page=0&size=1000&estado=PAGADA`, {
+    // Obtener todas las facturas del Componente B
+    const response = await fetch(`${API_B}/facturas?page=0&size=1000`, {
       cache: 'no-store'
     });
-    
+
     if (!response.ok) {
       throw new Error('Failed to fetch facturas');
     }
-    
+
     const data = await response.json();
     const facturas = data.content || [];
-    
+
     // Agrupar ingresos por mes
     const revenueByMonth: { [key: string]: number } = {};
     const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -31,26 +31,27 @@ export async function fetchRevenue(): Promise<Revenue[]> {
     monthNames.forEach(month => {
       revenueByMonth[month] = 0;
     });
-    
-    // Sumar totales por mes
+
+    // Sumar totales por mes (usando fecha de emisión en lugar de fecha de pago)
     facturas.forEach((factura: any) => {
-      if (factura.fechaPago) {
-        const fecha = new Date(factura.fechaPago);
+      if (factura.fechaEmision) {
+        const fecha = new Date(factura.fechaEmision);
         const monthIndex = fecha.getMonth();
         const monthName = monthNames[monthIndex];
+        
+        // Sumar el total de la factura al mes correspondiente
         revenueByMonth[monthName] += factura.total || 0;
       }
     });
-    
+
     // Convertir a formato Revenue[]
     const revenue: Revenue[] = monthNames.map(month => ({
       month,
       revenue: Math.round(revenueByMonth[month])
     }));
-    
-    console.log('Revenue data fetched successfully');
+
+    console.log('Revenue data fetched successfully:', revenue);
     return revenue;
-    
   } catch (error) {
     console.error('Database Error:', error);
     // Retornar datos vacíos en caso de error
